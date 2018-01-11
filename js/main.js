@@ -42,6 +42,10 @@ database.ref('reservations').on('child_added', function(snapshot) {
   reservationList.append(reservationTemplate);
 });
 
+$( function() {
+    $("#datepicker").datepicker({ minDate: -20, maxDate: "+1M +10D" });
+  } );
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.7128, lng: -74.0059},
