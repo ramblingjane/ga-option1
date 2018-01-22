@@ -12,22 +12,58 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-$('.dropdown-menu a').click(function() {
+// Show selection in dropdown
+$('.dropdown-menu reservation-day a').click(function() {
   $('#selected').text($(this).text());
 });
 
+// $('.dropdown-menu reservation-number a').click(function() {
+//   $('#numberInParty').text($(this).text());
+// });
+
+// Declare reservationData variable
 var reservationData = {};
 
+//var resDate;
+
+// jQuery callback: Execute the function when the DOM is ready to be used.
+$(function() {
+    $("#datepicker").datepicker({
+      minDate: 0,
+      maxDate: "+1M 0D",
+      onSelect: function() {
+        resDate = $(this).val();
+      }
+
+    });
+
+
+
+//    var resDate = $("#datepicker").datepicker("getDate");
+//    return resDate;
+//    console.log("date is: " + resDate);
+});
+
+// Set the reservation day: dropdown list
 $('.reservation-day li').click(function() {
   reservationData.day = $(this).text();
 });
 
+// Set the reservation number in party
+$('.reservation-number li').click(function() {
+  reservationData.number = $(this).text();
+});
+
+
+// On clicking Set Reservations button
 $('.reservations').on('submit', function(event) {
 
   event.preventDefault();
-
+  
+  // Set reservation name
   reservationData.name = $('.reservation-name').val();
-
+  
+  // Send reservation data to firebase database
   database.ref('reservations').push(reservationData);
 });
 
@@ -42,9 +78,7 @@ database.ref('reservations').on('child_added', function(snapshot) {
   reservationList.append(reservationTemplate);
 });
 
-$( function() {
-    $("#datepicker").datepicker({ minDate: -20, maxDate: "+1M +10D" });
-  } );
+
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
