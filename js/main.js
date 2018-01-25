@@ -12,37 +12,39 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+// Declare reservationData variable
+var reservationData = {};
+
+
 // Show selection in dropdown
-$('.dropdown-menu reservation-day a').click(function() {
+$('.reservation-day a').click(function() {
   $('#selected').text($(this).text());
 });
 
-// $('.dropdown-menu reservation-number a').click(function() {
-//   $('#numberInParty').text($(this).text());
-// });
+$('.reservation-number a').click(function() {
+  $('#numberInParty').text($(this).text());
+});
 
-// Declare reservationData variable
-var reservationData = {};
 
 //var resDate;
 
 // jQuery callback: Execute the function when the DOM is ready to be used.
-$(function() {
-    $("#datepicker").datepicker({
-      minDate: 0,
-      maxDate: "+1M 0D",
-      onSelect: function() {
-        resDate = $(this).val();
-      }
+// $(function() {
+//     $("#datepicker").datepicker({
+//       minDate: 0,
+//       maxDate: "+1M 0D",
+//       onSelect: function() {
+//         resDate = $(this).val();
+//       }
 
-    });
+//     });
 
 
 
-//    var resDate = $("#datepicker").datepicker("getDate");
-//    return resDate;
-//    console.log("date is: " + resDate);
-});
+// //    var resDate = $("#datepicker").datepicker("getDate");
+// //    return resDate;
+// //    console.log("date is: " + resDate);
+// });
 
 // Set the reservation day: dropdown list
 $('.reservation-day li').click(function() {
@@ -65,6 +67,18 @@ $('.reservations').on('submit', function(event) {
   
   // Send reservation data to firebase database
   database.ref('reservations').push(reservationData);
+
+  // clunky way to reset form fields to default
+  location.reload();
+
+  // Clear name input text box only
+  //$('form')[0].reset();
+
+// trying to reset dropdowns. this doesn't work.
+  $('.btn dropdown-toggle').removeClass('active');
+
+  //document.getElementById("myForm").reset(); doesn't clear dropdowns
+  
 });
 
 

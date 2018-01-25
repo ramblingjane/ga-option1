@@ -6,7 +6,7 @@ $( function() {
             var resDate = $(this).val();
 
             $('.selectedDate').text("Date is " + resDate + ".");
-            alert(resDate);
+            //alert(resDate);
 
         }
     });
