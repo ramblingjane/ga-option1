@@ -28,28 +28,27 @@ $('.reservation-number a').click(function() {
 
 //var resDate;
 
-// jQuery callback: Execute the function when the DOM is ready to be used.
-// $(function() {
-//     $("#datepicker").datepicker({
-//       minDate: 0,
-//       maxDate: "+1M 0D",
-//       onSelect: function() {
-//         resDate = $(this).val();
-//       }
+$( function() {
+    $( "#calendar" ).datepicker({
+        minDate: 0,
+        maxDate: "+1M 0D",
+        onSelect: function() {
+            var resDate = $(this).val();
 
-//     });
+            //$('.selectedDate').text("Date is " + resDate + ".");
+            reservationData.day = resDate;
+            //alert(resDate);
 
+        }
+    });
 
+} );
 
-// //    var resDate = $("#datepicker").datepicker("getDate");
-// //    return resDate;
-// //    console.log("date is: " + resDate);
-// });
 
 // Set the reservation day: dropdown list
-$('.reservation-day li').click(function() {
-  reservationData.day = $(this).text();
-});
+// $('.reservation-day li').click(function() {
+//   reservationData.day = $(this).text();
+// });
 
 // Set the reservation number in party
 $('.reservation-number li').click(function() {

@@ -1,5 +1,5 @@
 $( function() {
-    $( "#datepicker" ).datepicker({
+    $( "#calendar" ).datepicker({
         minDate: 0,
         maxDate: "+1M 0D",
         onSelect: function() {
